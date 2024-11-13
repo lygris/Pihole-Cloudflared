@@ -8,18 +8,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '164a874a-09f1-4ee7-a082-bc8a980dc624'
-  imageRepository: 'piholeunbound'
-  containerRegistry: 'lygris.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
-
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
-
-
 steps:
 - task: Docker@2
   displayName: Login
