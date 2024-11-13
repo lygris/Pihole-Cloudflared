@@ -19,21 +19,20 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-stages:
-- stage: Build
-  displayName: Build and push stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+
+steps:
+- task: Docker@2
+  displayName: Login
+  inputs:
+    containerRegistry: 'Docker Hub'
+    command: login
+- script: |
+   docker run --privileged --rm tonistiigi/binfmt --install arm64
+         docker run --privileged --rm tonistiigi/binfmt
+         docker buildx create --use
+         docker buildx build --platform linux/amd64,linux/arm64 \
+           -t lygris/pihole-unbound:$(build.buildNumber) \
+           -t lygris/pihole-unbound:latest \
+           --push \
+           .
+  displayName: 'Docker build arm64'
