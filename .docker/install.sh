@@ -52,12 +52,14 @@ sudo ipset create -! docker_lan_routable_net_set hash:net
 sudo ipset add -! docker_lan_routable_net_set 172.16.0.0/24
 sudo ipset create -! docker_wan_routable_net_set hash:net
 sudo ipset add -! docker_wan_routable_net_set 172.16.0.0/24
-sudo systemctl start docker-compose@pi-hole" > /home/pi/.firewalla/config/post_main.d/start_pihole.sh
+sudo systemctl start docker-compose@pi-hole
+sudo rmmod br_netfilter" > /home/pi/.firewalla/config/post_main.d/start_pihole.sh
 
 chmod a+x /home/pi/.firewalla/config/post_main.d/start_pihole.sh
 
 echo -n "Restarting docker"
 sudo docker start pihole
+sudo rmmod br_netfilter
 while [ -z "$(sudo docker ps | grep pihole | grep Up)" ]
 do
         echo -n "."
