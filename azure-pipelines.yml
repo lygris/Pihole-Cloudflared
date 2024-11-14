@@ -7,7 +7,7 @@ trigger:
 
 resources:
 - repo: self
-
+pool: default
 steps:
 - task: Docker@2
   displayName: Login
