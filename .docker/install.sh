@@ -11,7 +11,10 @@ if [ ! -d "$path2" ]; then
 	mkdir $path2
 fi
 
-# curl https://raw.githubusercontent.com/mbierman/pihole-installer-for-Firewalla/main/latest.yaml > $path2/docker-compose.yaml
+curl https://raw.githubusercontent.com/lygris/Pihole-Unbound/refs/heads/main/.docker/docker-compose.yaml > $path2/docker-compose.yaml
+touch /home/pi/.firewalla/config/dnsmasq_local/00-config.conf
+echo "add-subnet=32,128
+add-mac" > /home/pi/.firewalla/config/dnsmasq_local/00-config.conf
 
  
 cd $path2
