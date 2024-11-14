@@ -1,8 +1,7 @@
 FROM pihole/pihole:latest
 RUN apt update && apt upgrade -y && apt install -y unbound
 
-COPY unbound.conf /etc/unbound/unbound.conf.d/pi-hole.conf
-COPY start_unbound_and_s6_init.sh start_unbound_and_s6_init.sh
-
-RUN echo "/etc/init.d/unbound start" >> s6-init
+COPY unbound.conf /etc/unbound/unbound.conf.d/pihole.conf
+RUN mkdir -p /etc/services.d/unbound
+COPY unbound-run /etc/services.d/unbound/run
 ENTRYPOINT [ "/s6-init" ]
