@@ -15,12 +15,11 @@ steps:
     containerRegistry: 'Docker Hub'
     command: login
 - script: |
-   docker run --privileged --rm tonistiigi/binfmt --install arm64
-         docker run --privileged --rm tonistiigi/binfmt
-         docker buildx create --use
-         docker buildx build --platform linux/amd64,linux/arm64 \
-           -t lygris/pihole-unbound:$(build.buildNumber) \
-           -t lygris/pihole-unbound:latest \
-           --push \
-           .
-  displayName: 'Docker build arm64'
+    docker run --privileged --rm tonistiigi/binfmt --install arm64
+    docker buildx create --use
+    docker buildx build --platform linux/amd64,linux/arm64 \
+      -t lygris/pihole-unbound:$(build.buildNumber) \
+      -t lygris/pihole-unbound:latest \
+      --push \
+      .
+  displayName: 'Docker build'
