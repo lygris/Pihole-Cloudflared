@@ -11,7 +11,7 @@ if [ ! -d "$path2" ]; then
 	mkdir $path2
 fi
 
-curl https://raw.githubusercontent.com/lygris/Pihole-Unbound/refs/heads/main/.docker/docker-compose.yaml > $path2/docker-compose.yaml
+curl "https://raw.githubusercontent.com/lygris/Pihole-Unbound/refs/heads/main/.docker/docker-compose.yaml" > $path2/docker-compose.yaml
 touch /home/pi/.firewalla/config/dnsmasq_local/00-config.conf
 touch /home/pi/.firewalla/config/dnsmasq_local/pihole
 echo "add-subnet=32,128
