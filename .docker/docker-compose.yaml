@@ -6,7 +6,6 @@ services:
     container_name: pihole
     image: ghcr.io/lygris/pihole-unbound:latest
     hostname: pihole
-    domainname: ${DOMAIN_NAME}
     environment:
       FTLCONF_LOCAL_IPV4: 172.16.0.2
       # set a secure password here or the default will be firewalla
