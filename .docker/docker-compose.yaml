@@ -20,10 +20,13 @@ services:
       default:
         # static IP address for pi-hole
         ipv4_address: 172.16.0.2
+        ipv6_address: fc00::2
 networks:
   default:
     driver: bridge
+    enable_ipv6: true
     ipam:
      config:
        # your chosen docker network here
        - subnet: 172.16.0.0/24
+       - subnet: fc00::/7
