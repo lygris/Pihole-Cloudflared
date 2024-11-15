@@ -1,3 +1,2 @@
-# pihole-unbound
-# pihole-unbound
-Pihole container with built in Unbound.
+# pihole-unbound for Firewalla
+Pihole container with built in Unbound for running on Firewalla.
