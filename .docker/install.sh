@@ -1,12 +1,12 @@
 #!/bin/bash
 # v 1.1
 
-path1=/data/pi-hole
+path1=/data/pihole
 if [ ! -d "$path1" ]; then
 	sudo mkdir $path1
 fi
 
-path2=/home/pi/.firewalla/run/docker/pi-hole/
+path2=/home/pi/.firewalla/run/docker/pihole/
 if [ ! -d "$path2" ]; then
 	mkdir $path2
 fi
