@@ -15,7 +15,7 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
     restart: unless-stopped
     networks:
-      default:
+      pihole:
         # static IP address for pi-hole
         ipv4_address: 172.16.0.2
 
