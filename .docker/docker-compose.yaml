@@ -21,6 +21,7 @@ services:
 
 networks:
   pihole:
+    name: pihole
     driver: bridge
     driver_opts:
       com.docker.network.bridge.gateway_mode_ipv6: "routed"

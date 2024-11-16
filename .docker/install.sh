@@ -25,8 +25,8 @@ sudo systemctl restart firerouter_dns
 sudo systemctl start docker
 sudo docker-compose pull
 sudo docker-compose up --no-start
-sudo ip route add 172.16.0.0/24 dev br-$(sudo docker network inspect pihole_pihole |jq -r '.[0].Id[0:12]') table lan_routable
-sudo ip route add 172.16.0.0/24 dev br-$(sudo docker network inspect pihole_pihole |jq -r '.[0].Id[0:12]') table wan_routable
+sudo ip route add 172.16.0.0/24 dev br-$(sudo docker network inspect pihole |jq -r '.[0].Id[0:12]') table lan_routable
+sudo ip route add 172.16.0.0/24 dev br-$(sudo docker network inspect pihole |jq -r '.[0].Id[0:12]') table wan_routable
 sudo docker-compose up --detach
 
 
