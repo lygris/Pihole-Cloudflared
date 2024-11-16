@@ -10,7 +10,7 @@ services:
       WEBPASSWORD: 'firewalla'
     # Volumes store your data between container upgrades
     volumes:
-      - '/data/pi-hole/etc-pihole/:/etc/pihole/'
+      - '/data/pihole/etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
       - '/etc/localtime:/etc/localtime:ro'
     restart: unless-stopped
