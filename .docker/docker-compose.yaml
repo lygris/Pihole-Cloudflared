@@ -18,6 +18,25 @@ services:
       pihole:
         # static IP address for pi-hole
         ipv4_address: 172.16.0.2
+  tailscale:
+    hostname: tailscale
+    container_name: tailscale
+    image: tailscale/tailscale:stable
+    volumes:
+      - '/data/tailscale:/var/lib'
+      - '/dev/net/tun:/dev/net/tun'
+    environment:
+      - 'TS_EXTRA_ARGS=--advertise-exit-node'
+      - 'TS_ROUTES=10.0.0.0/8,172.16.0.0/24'
+      - 'TS_STATE_DIR=/var/lib'
+      - 'TS_AUTH_ONCE=true'
+    cap_add:
+      - net_admin
+      - sys_module
+    privileged: true
+    networks:
+      pihole:
+        ipv4_address: 172.16.0.3
 
 networks:
   pihole:
@@ -28,5 +47,5 @@ networks:
     enable_ipv6: true
     ipam:
      config:
-       # your chosen docker network here
        - subnet: 172.16.0.0/24
+       - subnet: ${ipv6PD}
