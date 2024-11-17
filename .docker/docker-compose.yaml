@@ -27,7 +27,7 @@ services:
       - '/dev/net/tun:/dev/net/tun'
     environment:
       - 'TS_EXTRA_ARGS=--advertise-exit-node'
-      - 'TS_ROUTES=10.0.0.0/8,172.16.0.0/24'
+      - 'TS_ROUTES=${ipv6PD}'
       - 'TS_STATE_DIR=/var/lib'
       - 'TS_AUTH_ONCE=true'
     cap_add:
