@@ -10,6 +10,11 @@ path2=/home/pi/.firewalla/run/docker/pihole
 if [ ! -d "$path2" ]; then
 	mkdir $path2
 fi
+if [$path2/docker-compose.yaml]; then
+        cd $path2/docker-compose.yaml
+        docker compose down
+        cd ~/
+fi
 
 curl "https://raw.githubusercontent.com/lygris/Pihole-Unbound/refs/heads/main/.docker/docker-compose.yaml" > $path2/docker-compose.yaml
 touch /home/pi/.firewalla/config/dnsmasq_local/00-config.conf
