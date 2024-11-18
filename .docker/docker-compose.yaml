@@ -4,6 +4,7 @@ services:
     container_name: pihole
     image: ghcr.io/lygris/pihole-unbound:latest
     hostname: pihole
+    shm_size: 128mb
     environment:
       FTLCONF_LOCAL_IPV4: 172.16.0.2
       # set a secure password here or the default will be firewalla
@@ -27,13 +28,14 @@ services:
       - '/dev/net/tun:/dev/net/tun'
     environment:
       - 'TS_EXTRA_ARGS=--advertise-exit-node'
-      - 'TS_ROUTES=${ipv6PD}'
+      - TS_ROUTES=$routes
       - 'TS_STATE_DIR=/var/lib'
       - 'TS_AUTH_ONCE=true'
     cap_add:
       - net_admin
       - sys_module
     privileged: true
+    dns: 172.16.0.2
     networks:
       pihole:
         ipv4_address: 172.16.0.3
