@@ -1,5 +1,5 @@
 FROM pihole/pihole:development
-RUN apk update && apk upgrade -y && apk add unbound -y
+RUN apk update && apk upgrade && apk add unbound
 RUN rc-update add unbound default
 
 COPY unbound.conf /etc/unbound/unbound.conf.d/pihole.conf
