@@ -7,4 +7,5 @@ RUN chmod +x /etc/unbound/run
 RUN touch /var/log/unbound.log
 RUN chmod 777 /var/log/unbound.log
 RUN sed -i '2i nohup bash -c unbound &' /usr/bin/start.sh
+RUN wget -S https://www.internic.net/domain/named.cache -O /etc/unbound/root.hints
 ENTRYPOINT [ "start.sh" ]
