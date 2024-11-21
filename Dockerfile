@@ -6,4 +6,5 @@ COPY unbound-run /etc/unbound/run
 RUN chmod +x /etc/unbound/run
 RUN touch /var/log/unbound.log
 RUN chmod 777 /var/log/unbound.log
+RUN sed '2 i nohup bash -c unbound &' /usr/bin/start.sh
 ENTRYPOINT [ "start.sh" ]
