@@ -23,22 +23,27 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+permissions:
+    contents: read
+    packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+    id-token: write
 
 
 jobs:
   call-dev-workflow:
     uses: lygris/Pihole-Unbound/.github/workflows/docker-publish.yml@development
-    secrets: 
-      token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit
   build:
 
     runs-on: 'ubuntu-latest'
-    permissions:
-      contents: read
-      packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
+    # permissions:
+    #   contents: read
+    #   packages: write
+    #   # This is used to complete the identity challenge
+    #   # with sigstore/fulcio when running outside of PRs.
+    #   id-token: write
 
     steps:
       - name: Checkout repository
