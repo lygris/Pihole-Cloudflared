@@ -33,8 +33,8 @@ permissions:
 
 jobs:
     build-dev:
-        uses: lygris/Pihole-Unbound/.github/workflows/dev.yml
+        uses: ./.github/workflows/dev.yml
         secrets: inherit
     build-prod:
-        uses: lygris/Pihole-Unbound/.github/workflows/prod.yml
+        uses: ./.github/workflows/prod.yml
         secrets: inherit
