@@ -28,7 +28,8 @@ env:
 jobs:
   call-dev-workflow:
     uses: lygris/Pihole-Unbound/.github/workflows/docker-publish.yml@development
-    secrets: inherit
+    secrets: 
+      token: ${{ secrets.GITHUB_TOKEN }}
   build:
 
     runs-on: 'ubuntu-latest'
