@@ -11,7 +11,7 @@ on:
   push:
     paths-ignore:
          - '.docker'
-    branches: [ "main" ]
+    branches: [ "main", "development" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
@@ -26,9 +26,9 @@ env:
 
 
 jobs:
-  call-dev-workflow:
-    uses: lygris/Pihole-Unbound/.github/workflows/docker-publish.yml@development
-    secrets: inherit
+  # call-dev-workflow:
+  #   uses: lygris/Pihole-Unbound/.github/workflows/docker-publish.yml@development
+  #   secrets: inherit
   build:
 
     runs-on: 'ubuntu-latest'
