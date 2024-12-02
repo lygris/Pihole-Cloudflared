@@ -26,6 +26,8 @@ env:
 
 
 jobs:
+  call-dev-workflow:
+    uses: lygris/Pihole-Unbound/.github/workflows/docker-publish.yml@development
   build:
 
     runs-on: 'ubuntu-latest'
