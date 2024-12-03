@@ -67,7 +67,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,development
-            type=sha,enable=true,priority=100,prefix=sha-,suffix=dev,format=short
+            type=sha,enable=true,priority=100,prefix=sha-,suffix=-dev,format=short
           labels: |
             org.opencontainers.image.version=development
            
