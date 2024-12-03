@@ -84,7 +84,7 @@ jobs:
           platforms: linux/amd64
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: development
+          tags: ghcr.io/lygris/pihole-unbound:development
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
