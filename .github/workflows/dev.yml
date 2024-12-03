@@ -73,8 +73,6 @@ jobs:
             type=semver,pattern={{major}}
             type=ref,event=branch
             type=raw,development
-          labels: |
-            "org.opencontainers.image.version": "development" 
            
 
       # Build and push Docker image with Buildx (don't push on PR)
