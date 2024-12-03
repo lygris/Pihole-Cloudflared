@@ -74,7 +74,7 @@ jobs:
             type=ref,event=branch
             type=raw,development
           labels: |
-           "org.opencontainers.image.version": "development" 
+            "org.opencontainers.image.version": "development" 
            
 
       # Build and push Docker image with Buildx (don't push on PR)
@@ -86,8 +86,9 @@ jobs:
           platforms: linux/amd64
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: development
+          labels: |
+            "org.opencontainers.image.version": "development"
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
