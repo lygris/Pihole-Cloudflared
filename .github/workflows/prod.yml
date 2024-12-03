@@ -73,7 +73,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,stable
-            type=sha,enable=true,priority=100,prefix=sha-,suffix=-stable,format=short
+            type=sha,enable=true,priority=100,prefix=,suffix=-stable,format=short
           flavor: |
             latest=true
 
