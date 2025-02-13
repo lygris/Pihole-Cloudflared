@@ -6,8 +6,8 @@ services:
     hostname: pihole
     environment:
       # set a secure password here or the default will be blank
-      WEBPASSWORD: ''
-      PIHOLE_DNS_: '127.16.0.2#5335'
+      FTLCONF_webserver_api_password: ''
+      FTLCONF_dns_upstreams: '1.1.1.1;1.0.0.1;2606:4700:4700::1111;2606:4700:4700::1001'
       ServerIP: 172.16.0.2
     # Volumes store your data between container upgrades
     volumes:
@@ -39,19 +39,25 @@ services:
     networks:
       pihole:
         ipv4_address: 172.16.0.3
-  portainer:
-    container_name: portainer
-    image: portainer/portainer-ce:latest
-    volumes:
-      - data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
+  # portainer:
+  #   container_name: portainer
+  #   image: portainer/portainer-ce:latest
+  #   volumes:
+  #     - data:/data
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     pihole:
+  #       ipv4_address: 172.16.0.4
+  #   restart: unless-stopped
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
     networks:
       pihole:
         ipv4_address: 172.16.0.4
-    restart: unless-stopped
-    
-volumes:
-  data:
+    environment:
+      TUNNEL_TOKEN: eyJhIjoiY2JlOGIyOTNlZGJmOGZhMTlkMDc2OWI1ZGIxYmI3MGMiLCJ0IjoiNDcwYTEwNGUtZGRhOC00YTU4LTkxMzYtOGQwOWYyYjE5MDdmIiwicyI6Ik1qUmxNbVV6TURZdE1tUTFNUzAwTVRoa0xXRTNZVEV0TkdSak1EYzNNREpoWVRaayJ9
 
 networks:
   pihole:
