@@ -27,8 +27,8 @@ permissions:
 
 jobs:
     build-dev:
-        uses: ./.github/workflows/dev.yml@main
+        uses: ./.github/workflows/dev.yml
         secrets: inherit
     build-prod:
-        uses: ./.github/workflows/prod.yml@main
+        uses: ./.github/workflows/prod.yml
         secrets: inherit
