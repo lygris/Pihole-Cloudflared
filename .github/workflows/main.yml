@@ -1,4 +1,4 @@
-name: Docker
+name: scheduled
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -9,12 +9,6 @@ name: Docker
 on:
   schedule:
     - cron: '30 21 * * *'
-  push:
-    paths-ignore:
-         - '.docker'
-    branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
   
@@ -33,8 +27,8 @@ permissions:
 
 jobs:
     build-dev:
-        uses: ./.github/workflows/dev.yml
+        uses: ./.github/workflows/dev.yml@main
         secrets: inherit
     build-prod:
-        uses: ./.github/workflows/prod.yml
+        uses: ./.github/workflows/prod.yml@main
         secrets: inherit

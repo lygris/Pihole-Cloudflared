@@ -1,4 +1,4 @@
-name: Docker
+name: Docker-dev
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -7,6 +7,11 @@ name: Docker
 
 on:
   workflow_call:
+  push:
+    paths-ignore:
+         - '.docker'
+    branches:
+      - 'development'
   
 
 env:
