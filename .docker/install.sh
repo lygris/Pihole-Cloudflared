@@ -11,12 +11,14 @@ if [ ! -d "$path2" ]; then
 	mkdir $path2
 fi
 if [$path2/docker-compose.yaml]; then
-        cd $path2/docker-compose.yaml
+        cd $path2
         docker compose down
         cd ~/
 fi
 
-curl "https://raw.githubusercontent.com/lygris/Pihole-Unbound/refs/heads/main/.docker/docker-compose.yaml" > $path2/docker-compose.yaml
+curl "https://raw.githubusercontent.com/lygris/Pihole-Unbound/refs/heads/development/.docker/docker-compose.yaml" > $path2/docker-compose.yaml
+curl "https://raw.githubusercontent.com/lygris/Pihole-Unbound/refs/heads/development/.docker/update.sh" > $path2/update.sh
+chmod +x $path2/update.sh
 touch /home/pi/.firewalla/config/dnsmasq_local/00-config.conf
 touch /home/pi/.firewalla/config/dnsmasq_local/pihole
 echo "add-subnet=32,128
@@ -57,9 +59,9 @@ sudo ipset add -! docker_lan_routable_net_set 172.16.0.0/24
 sudo ipset create -! docker_wan_routable_net_set hash:net
 sudo ipset add -! docker_wan_routable_net_set 172.16.0.0/24
 sudo ipset create -! docker_lan_routable_net_set6 hash:net family inet6
-sudo ipset add -! docker_lan_routable_net_set6 2600:6c44:3540:910::/64
+sudo ipset add -! docker_lan_routable_net_set6 $ipv6PD
 sudo ipset create -! docker_lan_routable_net_set6 hash:net family inet6
-sudo ipset add -! docker_wan_routable_net_set6 2600:6c44:3540:910::/64
+sudo ipset add -! docker_wan_routable_net_set6 $ipv6PD
 sudo systemctl start docker-compose@pihole
 sudo rmmod br_netfilter" > /home/pi/.firewalla/config/post_main.d/start_pihole.sh
 

@@ -2,12 +2,18 @@
 services:
   pihole:
     container_name: pihole
-    image: ghcr.io/lygris/pihole-unbound:latest
+    image: ghcr.io/lygris/pihole-unbound:development
     hostname: pihole
+    dns:
+      - 1.1.1.1
+    cap_add:
+      - CAP_SYS_TIME
     environment:
-      FTLCONF_LOCAL_IPV4: 172.16.0.2
-      # set a secure password here or the default will be firewalla
-      WEBPASSWORD: 'firewalla'
+      # set a secure password here or the default will be blank
+      FTLCONF_webserver_api_password: ''
+      # FTLCONF_dns_upstreams: '127.0.0.1#5053;::1#5053'
+      ServerIP: 172.16.0.2
+      TSAPIKEY: ''
     # Volumes store your data between container upgrades
     volumes:
       - '/data/pihole/etc-pihole/:/etc/pihole/'
@@ -34,11 +40,13 @@ services:
       - net_admin
       - sys_module
     privileged: true
+    restart: unless-stopped
     dns: 172.16.0.2
+    depends_on: 
+      - pihole
     networks:
       pihole:
         ipv4_address: 172.16.0.3
-
 networks:
   pihole:
     name: pihole
