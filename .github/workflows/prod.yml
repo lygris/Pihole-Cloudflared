@@ -7,7 +7,8 @@ name: Docker-prod
 
 
 on:
-  workflow_call:
+  schedule:
+    - cron: '30 21 * * *'
   push:
     paths-ignore:
          - '.docker'

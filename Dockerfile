@@ -1,11 +1,5 @@
 FROM pihole/pihole:latest
-RUN apt update && apt upgrade -y && apt install -y unbound
-
-COPY unbound.conf /etc/unbound/unbound.conf.d/pihole.conf
-RUN mkdir -p /etc/services.d/unbound
-COPY unbound-run /etc/services.d/unbound/run
-RUN chmod +x /etc/services.d/unbound/run
-RUN touch /var/log/unbound.log
-RUN chmod 777 /var/log/unbound.log
-COPY lighttpd-external.conf /etc/lighttpd/external.conf 
-ENTRYPOINT [ "/s6-init" ]
+RUN wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/bin/cloudflared
+RUN chmod +x /usr/bin/cloudflared
+RUN sed -i '83i cloudflared proxy-dns --port 5053 --upstream https://1.1.1.1/dns-query --upstream https://1.0.0.1/dns-query --address 0.0.0.0 > /var/log/pihole/FTL.log 2>&1 &' /usr/bin/start.sh
+ENTRYPOINT [ "start.sh" ]
