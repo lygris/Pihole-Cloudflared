@@ -1,2 +1,2 @@
-# pihole-unbound for Firewalla
-Pihole container with built in Unbound for running on Firewalla.
+# pihole and Cloudflared for Firewalla
+Pihole container with built in cloudflared dns proxy for running on Firewalla. There is a docker-compose for running it along with tailscale and it sets up an IPv6 network based on prefix delegation.
